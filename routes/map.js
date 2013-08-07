@@ -9,7 +9,7 @@ exports.show = function(req, res){
   db.connection().query('SELECT * FROM locations;', function (error, result) {
     var markers = "";
     result.rows.forEach(function (item) {
-      markers += "&markers=color:blue%7Clabel:S%7C"+item.lat+","+item.lon;
+      markers += "&markers=icon:http://team-radar.herokuapp.com/images/target.png%7Clabel:S%7C"+item.lat+","+item.lon;
     });
 
     res.render('map', {
