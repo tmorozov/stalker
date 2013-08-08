@@ -3,3 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  ul
+    li
+      a#map(href='/map') Map
+    li
+      a(href='/locations') Locations
+    li
+      a(href='/users') Users
+
+  script(src='/javascripts/geo.js')
+  script(src='/javascripts/init.js')
