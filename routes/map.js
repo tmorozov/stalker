@@ -16,7 +16,7 @@ exports.show = function(req, res){
 
     res.render('map', {
       title: 'Map',
-      mapInfo: 'center='+center+'&zoom=15&size=400x400&sensor=true&maptype=satellite'+markers
+      mapInfo: 'center='+center+'&zoom=16&size=640x400&sensor=true&maptype=satellite'+markers
     });
 
   });
