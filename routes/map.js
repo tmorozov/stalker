@@ -23,19 +23,20 @@ exports.show = function(req, res) {
 };
 
 exports.dynamic = function(req, res) {
-    var center = req.param('position') ? req.param('position') : '49.86240,23.92150';
-    var goals = [
-      ['цель 1', 49.8622, 23.9171, 4],
-      ['цель 2', 49.8623, 23.9172, 5],
-      ['цель 3', 49.8624, 23.9173, 3],
-      ['цель 4', 49.8621, 23.9174, 2],
-      ['цель 5', 49.8620, 23.9175, 1]
+    var centerStr = req.param('position') ? req.param('position') : '49.86240,23.92150';
+    var center = centerStr.split(',');
+    var points = [
+      ['цель', 49.8622, 23.9171, "target"],
+      ['Орги и Мертвяк', 49.8623, 23.9172, "npc"],
+      ['цель', 49.8624, 23.9173, "target"],
+      ['цель', 49.8621, 23.9174, "target"],
+      ['Я', center[0], center[1], "me"]
     ];
 
     res.render('map_dynamic', {
       layout: false,
       title: 'Map Dynamic',
-      center: center,
-      goals: JSON.stringify(goals)
+      center: JSON.stringify(center),
+      points: JSON.stringify(points)
     });
 };
