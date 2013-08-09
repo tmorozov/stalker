@@ -37,7 +37,8 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/locations', location.list);
-app.get('/map', map.show);
+app.get('/map1', map.show);
+app.get('/map', map.dynamic);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

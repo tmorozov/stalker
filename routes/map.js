@@ -5,7 +5,7 @@
 
 var db = require('../db');
 
-exports.show = function(req, res){
+exports.show = function(req, res) {
   db.connection().query('SELECT * FROM locations;', function (error, result) {
     // Rjasne by default
     var center = req.param('position') ? req.param('position') : '49.86240,23.92150';
@@ -21,3 +21,10 @@ exports.show = function(req, res){
 
   });
 };
+
+exports.dynamic = function(req, res) {
+    res.render('map_dynamic', {
+      title: 'Map Dynamic',
+      mapInfo: ""
+    });
+}
