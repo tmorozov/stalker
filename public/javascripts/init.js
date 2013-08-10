@@ -1,10 +1,10 @@
 function gotoMaps (e) {
-	var position = app.module.geo.getPosition();
-	alert(position.coords.latitude+','+position.coords.longitude);
+	// var position = app.module.geo.getPosition();
+	// alert(position.coords.latitude+','+position.coords.longitude);
 	var newUrl = this.href;
-	if (position) {
-		newUrl += "?position="+position.coords.latitude+","+position.coords.longitude;
-	}
+	// if (position) {
+	// 	newUrl += "?position="+position.coords.latitude+","+position.coords.longitude;
+	// }
 
 	window.location.href = newUrl+'?test=true';
 	// prevent default
