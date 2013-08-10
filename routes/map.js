@@ -33,7 +33,6 @@ exports.dynamic = function(req, res) {
     }
 
     res.render('map_dynamic', {
-      layout: false,
       title: 'Map Dynamic',
       center: JSON.stringify(center),
       points: JSON.stringify(points)

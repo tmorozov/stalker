@@ -2,6 +2,24 @@ doctype 5
 html
   head
     title= title
+
+    meta(name="viewport", content="initial-scale=1.0, user-scalable=no")
+    meta(charset="utf-8")
+    style.
+      html, body, #map-canvas {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true")
+
   body
+    h1= title
+    ul
+      li
+        a#map(href='/map') Map
+      li
+        a#goals(href='/goals') Goals
+
     block content

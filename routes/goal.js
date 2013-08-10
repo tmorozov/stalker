@@ -18,7 +18,7 @@ exports.index = function(req, res){
 
 exports.create = function(req, res){
   req.session.goals = req.session.goals || {};
-  
+
   req.session.goals[req.param('goal')] = true;
   var oldGoals = req.session.goals || {};
 
@@ -29,8 +29,6 @@ exports.create = function(req, res){
       goals[key] = val;
     }
   });
-
-  //goals[req.param('goal')] = [0, 0];
 
   res.render('goal', { 
     title: 'Current Goals',

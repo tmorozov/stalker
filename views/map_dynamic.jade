@@ -1,25 +1,16 @@
-doctype 5
-html
-  head
-    title Dynamic Map
-    meta(name="viewport", content="initial-scale=1.0, user-scalable=no")
-    meta(charset="utf-8")
-    style.
-      html, body, #map-canvas {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-    script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true")
-  body
-    div#map-canvas
+extends layout
 
-    script.
-      var options = {
-        map: {
-          center: !{center},
-          points: !{points}
-        }
-      }
+block content
+  p Current Map
 
-    script(src="/javascripts/map.js")
+  div#map-canvas
+
+  script.
+    var options = {
+      map: {
+        center: !{center},
+        points: !{points}
+      }
+    }
+
+  script(src="/javascripts/map.js")
