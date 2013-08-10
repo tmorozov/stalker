@@ -10,10 +10,10 @@ var location = require('./routes/location');
 var map = require('./routes/map');
 var http = require('http');
 var path = require('path');
-var db = require('./db');
+// var db = require('./db');
 var app = express();
 
-db.open();
+//db.open();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -35,9 +35,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/locations', location.list);
-app.get('/map1', map.show);
+// app.get('/users', user.list);
+// app.get('/locations', location.list);
+// app.get('/map1', map.show);
 app.get('/map', map.dynamic);
 
 http.createServer(app).listen(app.get('port'), function(){

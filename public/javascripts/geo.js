@@ -14,6 +14,7 @@ app.module['geo'] = (function (app) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition( function(position) {
         setLocation(position);
+        alert(position.coords.latitude+','+position.coords.longitude);
       });
 
       watchID = navigator.geolocation.watchPosition(function(position) {
