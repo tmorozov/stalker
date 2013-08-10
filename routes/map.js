@@ -7,10 +7,24 @@ function addPoints(points, src, label) {
   });
 }
 
+function filterTargets(allTargets, myGoals) {
+  var targets = {};
+  Object.keys(allTargets).forEach(function(key) {
+    var val = allTargets[key];
+    if(key in myGoals) {
+      targets[key] = val;
+    }
+  });
+
+  return targets;
+}
+
 exports.dynamic = function(req, res) {
+    var myGoals = req.session.goals || {};
+    var myTargets = filterTargets(data.targets, myGoals);
     var points = [];
     addPoints(points, data.npcs, 'npc');
-    addPoints(points, data.targets, 'target');
+    addPoints(points, myTargets, 'target');
 
     var centerStr = req.param('position') ? req.param('position') : '49.86240,23.92150';
     var center = centerStr.split(',');
