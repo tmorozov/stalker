@@ -4,9 +4,8 @@ block content
   h1= title
   p List of current goals.
   ul
-    li Goal 1
-    li Goal 2
-    li Goal 3
+    each val, index in goals
+      li= index
 
   p Add new goal
   form(method="post")
