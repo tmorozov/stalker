@@ -6,7 +6,7 @@ function gotoMaps (e) {
 		newUrl += "?position="+position.coords.latitude+","+position.coords.longitude;
 	}
 
-	window.location.href = newUrl;
+	window.location.href = newUrl+'?test=true';
 	// prevent default
 	return false;
 }
