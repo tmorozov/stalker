@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p List of current goals.
+  ul
+    li Goal 1
+    li Goal 2
+    li Goal 3
+
+  p Add new goal
+  form(method="post")
+    input(type="text", name="goal")
+    input(type="submit")

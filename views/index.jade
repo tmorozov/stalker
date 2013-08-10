@@ -2,10 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Это попытка создать аналог игрового варианта #{title} для страйкбола и подобных игр.
   ul
     li
       a#map(href='/map') Map
-
-  script(src='/javascripts/geo.js')
-  script(src='/javascripts/init.js')
+    li
+      a#goals(href='/goals') Goals
