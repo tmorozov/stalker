@@ -7,14 +7,12 @@ function msg(text) {
 msg('Js init');
 
 if (navigator.geolocation) {
-  var timeoutVal = 10 * 1000 * 1000;
-//  var timeoutVal = 0; //infinity - timeout on heroku?
-  navigator.geolocation.getCurrentPosition(
-    displayPosition, 
-    displayError, {
-      enableHighAccuracy: true,
-      timeout: timeoutVal,
-      maximumAge: 60 * 1000 * 1000
+  var watchId = navigator.geolocation.watchPosition(
+    displayPosition,
+    displayError, { 
+      enableHighAccuracy: true, 
+      maximumAge: 60000, // 1 min
+      timeout: 30000 // 30 sec
     }
   );
 } else {
@@ -22,8 +20,15 @@ if (navigator.geolocation) {
 }
 
 function displayPosition(position) {
-  msg("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+  displayPosition.counter++;
+  msg("Latitude: " + position.coords.latitude + 
+    ", Longitude: " + position.coords.longitude +
+    ", accuracy:" + position.coords.accuracy +
+    ", counter:" + displayPosition.counter);
+
 }
+
+displayPosition['counter'] = 0;
 
 function displayError(error) {
   var errors = { 
