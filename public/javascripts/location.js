@@ -7,8 +7,8 @@ function msg(text) {
 msg('Js init');
 
 if (navigator.geolocation) {
-//  var timeoutVal = 10 * 1000 * 1000;
-  var timeoutVal = 0;
+  var timeoutVal = 10 * 1000 * 1000;
+//  var timeoutVal = 0; //infinity - timeout on heroku?
   navigator.geolocation.getCurrentPosition(
     displayPosition, 
     displayError, {
