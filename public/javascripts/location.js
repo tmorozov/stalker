@@ -14,7 +14,7 @@ if (navigator.geolocation) {
     displayError, {
       enableHighAccuracy: true,
       timeout: timeoutVal,
-      maximumAge: 60 * 1000 * 1000;
+      maximumAge: 60 * 1000 * 1000
     }
   );
 } else {
