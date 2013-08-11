@@ -24,8 +24,8 @@ function displayPosition(position) {
   msg("Latitude: " + position.coords.latitude + 
     ", Longitude: " + position.coords.longitude +
     ", accuracy:" + position.coords.accuracy +
-    ", counter:" + displayPosition.counter);
-
+    ", counter:" + displayPosition.counter +
+    ", timestamp: " + new Date(position.timestamp));
 }
 
 displayPosition['counter'] = 0;
