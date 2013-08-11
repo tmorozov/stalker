@@ -4,12 +4,15 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var map = require('./routes/map');
-var goal = require('./routes/goal');
 var http = require('http');
 var path = require('path');
 var app = express();
+
+// routes
+var routes = require('./routes');
+var map = require('./routes/map');
+var goal = require('./routes/goal');
+var test = require('./routes/test');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -34,6 +37,7 @@ app.get('/', routes.index);
 app.get('/map', map.dynamic);
 app.get('/goals', goal.index);
 app.post('/goals', goal.create);
+app.get('/location', test.location);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
