@@ -1,0 +1,9 @@
+h3 User: {{user.name}}
+
+ul
+  li(ng-repeat="location in locations")
+    a(ng-click="goTo(location)") {{location}}
+
+h1 {{location}} page
+
+block content

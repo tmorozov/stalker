@@ -13,6 +13,7 @@ var routes = require('./routes');
 var map = require('./routes/map');
 var goal = require('./routes/goal');
 var test = require('./routes/test');
+var ngapp = require('./routes/ngapp');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -28,16 +29,22 @@ app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+// // development only
+// if ('development' == app.get('env')) {
+//   app.use(express.errorHandler());
+// }
+
+app.use(express.errorHandler());
+app.locals.pretty = true;
 
 app.get('/', routes.index);
+app.get('/partials/:name', routes.partials);
+
 app.get('/map', map.dynamic);
 app.get('/goals', goal.index);
 app.post('/goals', goal.create);
 app.get('/location', test.location);
+app.get('/app', ngapp.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

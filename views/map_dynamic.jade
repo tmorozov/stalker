@@ -1,6 +1,14 @@
 extends layout
 
 block content
+  style.
+    html, body, #map-canvas {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+  script(src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true")
+
   p Current Map
 
   div#map-canvas
