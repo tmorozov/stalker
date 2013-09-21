@@ -2,9 +2,7 @@ extends layout
 
 block content
   ul
-    li Me
-    li Targets
-    li NPC
-    li Ppl
+    li(ng-repeat="group in groups") 
+      a(ng-click="center(group)") {{group}}
 
   div#map-canvas

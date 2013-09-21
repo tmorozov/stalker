@@ -130,6 +130,14 @@ function ctrMap($scope) {
     ["6i4",49.863714,23.919054,"target"]
   ];
 
+  $scope.center = function (group) {
+    if(group === 'me' && $scope.myPosition ) {
+      console.log($scope.myPosition);
+      $scope.map.setCenter($scope.myPosition[0].getPosition());
+    }
+  }
+
+  $scope.groups = ['me', 'targets', 'npc', 'ppl'];
   $scope.map = initializeMap();
   $scope.markers = showOverlay($scope.map, points);
   $scope.myPosition = false;
