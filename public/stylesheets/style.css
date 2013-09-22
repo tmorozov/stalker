@@ -1,6 +1,5 @@
 html,
-body,
-#map-canvas {
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -13,6 +12,7 @@ a {
   cursor: pointer;
 }
 #map-canvas {
+  height: 216pt;
   border: 1px #ccc solid;
   display: block;
 }
