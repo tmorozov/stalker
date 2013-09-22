@@ -1,9 +1,15 @@
-h3 User: {{user.name}}
-
-ul
-  li(ng-repeat="location in locations")
-    a(ng-click="goTo(location)") {{location}}
-
-h1 {{location}} page
+.navbar.navbar-default.navbar-static-top
+  .container
+    .navbar-header
+      button.navbar-toggle(ng-click="togleNav()",
+        data-toggle="collapse", data-target=".navbar-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand User: {{user.name}}
+    .navbar-collapse(ng-class="{collapse: showNav, in: !showNav}")
+      ul.nav.navbar-nav
+        li(ng-class="{active: isActive(location)}", ng-repeat="location in locations")
+          a(ng-click="goTo(location)") {{location}}
 
 block content

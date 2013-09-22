@@ -8,9 +8,18 @@ config(function($routeProvider) {
     otherwise({redirectTo:'/quests'});
 }).
 run(function ($rootScope, $location) {
+  $rootScope.showNav = true;
+  $rootScope.togleNav = function () {
+    $rootScope.showNav = !$rootScope.showNav;
+  }
+
+
   $rootScope.locations = ['map', 'quests'];
-  
+  $rootScope.isActive = function (location) {
+    return location === $rootScope.currentLocation;
+  }
   $rootScope.goTo = function(location) {
+    $rootScope.currentLocation = location;
     $location.path('/'+location);
   }
 
@@ -28,7 +37,8 @@ function ctrAuth($rootScope, $scope, $location) {
       name: $scope.name,
       pwd: $scope.pwd
     }
-    $location.path('/quests');
+    $rootScope.goTo('quests');
+    // $location.path('/quests');
   }
 }
 

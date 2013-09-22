@@ -1,5 +1,8 @@
-label name:
-input.name(ng-model="name", autofocus="true")
-label pwd:
-input(type="password", ng-model="pwd")
-button(ng-click="login()") enter
+.container
+  form.form-signin
+    h2.form-signin-heading Please sign in
+    input.form-control(ng-model="name", 
+      type="text", placeholder="User name", autofocus)
+    input.form-control(ng-model="pwd",
+      type="password", placeholder="Password")
+    button.btn.btn-lg.btn-primary.btn-block(ng-click="login()") Sign in

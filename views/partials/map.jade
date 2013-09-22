@@ -1,8 +1,9 @@
 extends layout
 
 block content
-  ul
-    li(ng-repeat="group in groups") 
-      a(ng-click="center(group)") {{group}}
+  .container
+    ul
+      li(ng-repeat="group in groups") 
+        a(ng-click="center(group)") {{group}}
 
-  div#map-canvas
+    div#map-canvas
