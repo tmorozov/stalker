@@ -19,21 +19,17 @@ function ctrMap($scope) {
       return [];
     }
 
-    var markers = [];
-
     for(var i=points.length-1; i>=0; i--) {
       var point = points[i];
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(point[1], point[2]),
+        position: new google.maps.LatLng(point.location[0], point.location[1]),
         map: map,
-        title: point[0],
-        icon: '/images/'+point[3]+'.png'
+        title: point.name,
+        icon: '/images/'+point.img+'.png'
       });
 
-      markers.push(marker);
+      point.marker = marker;
     }
-
-    return markers;
   }
 
   function removeMarker(marker) {
@@ -45,12 +41,11 @@ function ctrMap($scope) {
 
   function displayPosition(position) {
     displayPosition.counter++;
-    var points = [
-      ["Я", position.coords.latitude, position.coords.longitude, "me"]
-    ];
 
-    removeMarker($scope.myPosition);
-    $scope.myPosition = showOverlay($scope.map, points);
+    $scope.me.location = [position.coords.latitude, position.coords.longitude];
+
+    removeMarker($scope.me.marker);
+    showOverlay($scope.map, [$scope.me]);
 
     console.log("Lat: " + position.coords.latitude + 
       ", Lon: " + position.coords.longitude +
@@ -62,12 +57,6 @@ function ctrMap($scope) {
   displayPosition['counter'] = 0;
 
   function displayError(error) {
-    var errors = { 
-      1: 'Permission denied',
-      2: 'Position unavailable',
-      3: 'Request timeout'
-    };
-    console.log("Error: " + errors[error.code]);
   }
 
   function activateMyPosition() {
@@ -84,24 +73,44 @@ function ctrMap($scope) {
     }
   }
 
-  var points = [
-    ["npc1",49.862155,23.916207,"npc"],
-    ["npc2",49.864416,23.921962,"npc"],
-    ["npc3",49.860313,23.925817,"npc"],
-    ["2b2",49.86498,23.916439,"target"],
-    ["6i4",49.863714,23.919054,"target"]
-  ];
-
-  $scope.center = function (group) {
-    if(group === 'me' && $scope.myPosition ) {
-      console.log($scope.myPosition);
-      $scope.map.setCenter($scope.myPosition[0].getPosition());
-    }
+  $scope.center = function (location) {
+    $scope.map.setCenter(new google.maps.LatLng(location[0], location[1]));
   }
 
-  $scope.groups = ['me', 'targets', 'npc', 'ppl'];
+  $scope.me = {
+    name: 'Я',
+    location: [49.862155,23.916207],
+    img: 'me'
+  };
+
+  $scope.npcs = [{
+    name: 'Доктор',
+    location: [49.862155,23.916207],
+    img: 'npc'
+  }, {
+    name: 'Барыга',
+    location: [49.864416,23.921962],
+    img: 'npc'
+  }, {
+    name: 'Бармен',
+    location: [49.860313,23.925817],
+    img: 'npc'
+  }];
+
+  $scope.targets = [{
+    name: '2b2',
+    location: [49.86498,23.916439],
+    img: 'target'
+  }, {
+    name: '6i4',
+    location: [49.863714,23.919054],
+    img: 'target'
+  }];
+
   $scope.map = initializeMap();
-  $scope.markers = showOverlay($scope.map, points);
-  $scope.myPosition = false;
+  showOverlay($scope.map, $scope.targets);
+  showOverlay($scope.map, $scope.npcs);
+  showOverlay($scope.map, [$scope.me]);
+
   activateMyPosition();
 }

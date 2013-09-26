@@ -2,8 +2,19 @@ extends layout
 
 block content
   .container
-    ul
-      li(ng-repeat="group in groups") 
-        a(ng-click="center(group)") {{group}}
+    .dropdown.open
+      ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenu1")
+        li(role="presentation")
+          a(role="menuitem", tabindex="-1", ng-click="center(me.location)") {{me.name}}
+        li.divider(role="presentation")
+        li.dropdown-header(role="presentation") NPC
+        li(ng-repeat="npc in npcs", role="presentation")
+          a(ng-click="center(npc.location)",
+            role="menuitem", tabindex="-1") {{npc.name}}
+        li.divider(role="presentation")
+        li.dropdown-header(role="presentation") Targets
+        li(ng-repeat="target in targets", role="presentation")
+          a(ng-click="center(target.location)",
+            role="menuitem", tabindex="-1") {{target.name}}
 
     div#map-canvas
