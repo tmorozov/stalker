@@ -112,5 +112,6 @@ function ctrMap($scope) {
   showOverlay($scope.map, $scope.npcs);
   showOverlay($scope.map, [$scope.me]);
 
+  $scope.openMarkers = false;
   activateMyPosition();
 }
