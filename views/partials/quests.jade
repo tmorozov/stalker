@@ -4,25 +4,22 @@ block content
   .container
     .panel-group
       .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            a.accordion-toggle(ng-click="showAvailable = !showAvailable") Available
+        .panel-heading(ng-click="showAvailable = !showAvailable")
+          h4.panel-title Available
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showAvailable]")
           .panel-body Доступные задания
 
       .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            a.accordion-toggle(ng-click="showActive = !showActive") Active
+        .panel-heading(ng-click="showActive = !showActive")
+          h4.panel-title Active
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showActive]")
           .panel-body Активные задания
 
       .panel.panel-default
-        .panel-heading
-          h4.panel-title
-            a.accordion-toggle(ng-click="showClosed = !showClosed") Closed
+        .panel-heading(ng-click="showClosed = !showClosed")
+          h4.panel-title Closed
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showClosed]")
           .panel-body Закрытые задания
