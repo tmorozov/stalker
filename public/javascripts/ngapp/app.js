@@ -8,19 +8,13 @@ config(function($routeProvider) {
     otherwise({redirectTo:'/quests'});
 }).
 run(function ($rootScope, $location) {
-  $rootScope.showNav = true;
-  $rootScope.togleNav = function () {
-    $rootScope.showNav = !$rootScope.showNav;
+  $rootScope.tabs = ['map', 'quests'];
+  $rootScope.isActive = function (tab) {
+    return tab === $rootScope.currentTab;
   }
-
-
-  $rootScope.locations = ['map', 'quests'];
-  $rootScope.isActive = function (location) {
-    return location === $rootScope.currentLocation;
-  }
-  $rootScope.goTo = function(location) {
-    $rootScope.currentLocation = location;
-    $location.path('/'+location);
+  $rootScope.goTo = function(tab) {
+    $rootScope.currentTab = tab;
+    $location.path('/'+tab);
   }
 
   $rootScope.$on("$routeChangeStart", function (event, next, current) {

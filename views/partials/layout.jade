@@ -1,15 +1,15 @@
 .navbar.navbar-default.navbar-static-top
   .container
     .navbar-header
-      button.navbar-toggle(ng-click="togleNav()",
+      button.navbar-toggle(ng-click="showNav=!showNav",
         data-toggle="collapse", data-target=".navbar-collapse")
         span.icon-bar
         span.icon-bar
         span.icon-bar
       a.navbar-brand User: {{user.name}}
-    .navbar-collapse(ng-class="{collapse: showNav, in: !showNav}")
+    .navbar-collapse(ng-class="{true: 'in', false: 'collapse'}[showNav]")
       ul.nav.navbar-nav
-        li(ng-class="{active: isActive(location)}", ng-repeat="location in locations")
-          a(ng-click="goTo(location)") {{location}}
+        li(ng-class="{active: isActive(tab)}", ng-repeat="tab in tabs")
+          a(ng-click="goTo(tab)") {{tab}}
 
 block content
