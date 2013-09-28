@@ -37,7 +37,7 @@ block content
             span.badge.pull-right {{closed.length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showClosed]")
-          .panel-body Закрытые задания
+          .panel-body
             .panel.panel-default(ng-repeat="quest in closed")
               .panel-heading {{quest.name}}
               .panel-body {{quest.desc}}
