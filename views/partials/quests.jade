@@ -5,21 +5,39 @@ block content
     .panel-group
       .panel.panel-default
         .panel-heading(ng-click="showAvailable = !showAvailable")
-          h4.panel-title Available
+          h4.panel-title Доступные задания
+            span.badge.pull-right {{available.length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showAvailable]")
-          .panel-body Доступные задания
+          .panel-body
+            .panel.panel-default(ng-repeat="quest in available")
+              .panel-heading 
+                {{quest.name}}
+                button.btn.btn-success.btn-xs.pull-right(ng-click="activate(quest)")
+                  .glyphicon.glyphicon-ok
+              .panel-body {{quest.desc}}
 
       .panel.panel-default
         .panel-heading(ng-click="showActive = !showActive")
-          h4.panel-title Active
+          h4.panel-title Активные задания
+            span.badge.pull-right {{active.length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showActive]")
-          .panel-body Активные задания
+          .panel-body
+            .panel.panel-default(ng-repeat="quest in active")
+              .panel-heading {{quest.name}}
+                {{quest.name}}
+                button.btn.btn-danger.btn-xs.pull-right(ng-click="remove(quest)")
+                  .glyphicon.glyphicon-remove
+              .panel-body {{quest.desc}}
 
       .panel.panel-default
         .panel-heading(ng-click="showClosed = !showClosed")
-          h4.panel-title Closed
+          h4.panel-title Закрытые задания  
+            span.badge.pull-right {{closed.length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showClosed]")
           .panel-body Закрытые задания
+            .panel.panel-default(ng-repeat="quest in closed")
+              .panel-heading {{quest.name}}
+              .panel-body {{quest.desc}}
