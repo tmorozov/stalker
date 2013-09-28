@@ -6,11 +6,11 @@ block content
       .panel.panel-default
         .panel-heading(ng-click="showAvailable = !showAvailable")
           h4.panel-title Доступные задания
-            span.badge.pull-right {{available.length}}
+            span.badge.pull-right {{(quests | filter:{state: 0}).length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showAvailable]")
           .panel-body
-            .panel.panel-default(ng-repeat="quest in available")
+            .panel.panel-default(ng-repeat="quest in quests | filter:{state: 0}")
               .panel-heading 
                 {{quest.name}}
                 button.btn.btn-success.btn-xs.pull-right(ng-click="activate(quest)")
@@ -20,11 +20,11 @@ block content
       .panel.panel-default
         .panel-heading(ng-click="showActive = !showActive")
           h4.panel-title Активные задания
-            span.badge.pull-right {{active.length}}
+            span.badge.pull-right {{(quests | filter:{state: 1}).length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showActive]")
           .panel-body
-            .panel.panel-default(ng-repeat="quest in active")
+            .panel.panel-default(ng-repeat="quest in quests | filter:{state: 1}")
               .panel-heading {{quest.name}}
                 {{quest.name}}
                 button.btn.btn-danger.btn-xs.pull-right(ng-click="remove(quest)")
@@ -34,10 +34,10 @@ block content
       .panel.panel-default
         .panel-heading(ng-click="showClosed = !showClosed")
           h4.panel-title Закрытые задания  
-            span.badge.pull-right {{closed.length}}
+            span.badge.pull-right {{(quests | filter:{state: 2}).length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showClosed]")
           .panel-body
-            .panel.panel-default(ng-repeat="quest in closed")
+            .panel.panel-default(ng-repeat="quest in quests | filter:{state: 2}")
               .panel-heading {{quest.name}}
               .panel-body {{quest.desc}}
