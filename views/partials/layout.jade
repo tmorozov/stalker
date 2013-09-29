@@ -6,6 +6,10 @@
         span.icon-bar
         span.icon-bar
       a.navbar-brand User: {{user.name}}
+      p.navbar-text
+        span.glyphicon.glyphicon-globe(
+          ng-class="{ok:'text-success', warning:'text-warning', error: 'text-danger'}[navState]"
+        )
     .navbar-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showNav]")
       ul.nav.navbar-nav
         li(ng-class="{active: isActive(tab)}", ng-repeat="tab in tabs")

@@ -22,6 +22,20 @@ run(function ($rootScope, $location) {
     }
   });
 
+  $rootScope.navState = 'error';
+  $rootScope.$on("locationUpdated", function (event, position) {
+    if(position.valid) {
+      console.log(position.coords);
+      if(position.coords.accuracy < 30) {
+        $rootScope.navState = 'ok';
+      } else {
+        $rootScope.navState = 'warning';
+      }
+    } else {
+      $rootScope.navState = 'error';
+    }
+  });
+
 });
 
 function ctrAuth($rootScope, $scope, $location) {

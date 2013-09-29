@@ -71,7 +71,6 @@ function ctrMap($scope, Geolocation) {
     img: 'target'
   }];
 
-  $scope.msg = "location search";
   $scope.map = initializeMap();
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
@@ -80,13 +79,10 @@ function ctrMap($scope, Geolocation) {
   $scope.openMarkers = false;
   $scope.$on("locationUpdated", function (event, position) {
     if(position.valid) {
-      $scope.msg = "location updated";
       $scope.me.location = [position.coords.latitude, position.coords.longitude];
 
       removeMarker($scope.me.marker);
       showOverlay($scope.map, [$scope.me]);
-    } else {
-      $scope.msg = "failed to find location";
     }
   });
 
