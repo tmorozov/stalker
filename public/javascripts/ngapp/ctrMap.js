@@ -1,6 +1,4 @@
-function ctrMap($scope) {
-  // $scope.location = 'Map';
-
+function ctrMap($scope, Geolocation) {
   function initializeMap() {
 
     var mapOptions = {
@@ -39,40 +37,6 @@ function ctrMap($scope) {
     marker.setMap(null);
   }
 
-  function displayPosition(position) {
-    displayPosition.counter++;
-
-    $scope.me.location = [position.coords.latitude, position.coords.longitude];
-
-    removeMarker($scope.me.marker);
-    showOverlay($scope.map, [$scope.me]);
-
-    console.log("Lat: " + position.coords.latitude + 
-      ", Lon: " + position.coords.longitude +
-      ", accuracy:" + position.coords.accuracy +
-      ", counter:" + displayPosition.counter +
-      ", timestamp: " + new Date(position.timestamp));
-  }
-
-  displayPosition['counter'] = 0;
-
-  function displayError(error) {
-  }
-
-  function activateMyPosition() {
-    if (navigator.geolocation) {
-      var watchId = navigator.geolocation.watchPosition(
-        displayPosition, displayError, { 
-          enableHighAccuracy: true, 
-          maximumAge: 60000, // 1 min
-          timeout: 30000 // 30 sec
-        }
-      );
-    } else {
-      return false;
-    }
-  }
-
   $scope.center = function (location) {
     $scope.map.setCenter(new google.maps.LatLng(location[0], location[1]));
   }
@@ -107,11 +71,24 @@ function ctrMap($scope) {
     img: 'target'
   }];
 
+  $scope.msg = "location search";
   $scope.map = initializeMap();
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
   showOverlay($scope.map, [$scope.me]);
 
   $scope.openMarkers = false;
-  activateMyPosition();
+  $scope.$on("locationUpdated", function (event, position) {
+    if(position.valid) {
+      $scope.msg = "location updated";
+      $scope.me.location = [position.coords.latitude, position.coords.longitude];
+
+      removeMarker($scope.me.marker);
+      showOverlay($scope.map, [$scope.me]);
+    } else {
+      $scope.msg = "failed to find location";
+    }
+  });
+
+  Geolocation.watch();
 }

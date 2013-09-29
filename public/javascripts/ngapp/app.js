@@ -1,5 +1,4 @@
-
-angular.module('main', []).
+var app = angular.module('main', []).
 config(function($routeProvider) {
   $routeProvider.
     when('/quests', {controller: ctrQuests, templateUrl:'partials/quests'}).
