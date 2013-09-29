@@ -14,7 +14,7 @@ block content
               .panel-heading 
                 {{quest.name}}
                 button.btn.btn-success.btn-xs.pull-right(ng-click="activate(quest)")
-                  .glyphicon.glyphicon-ok
+                  .glyphicon.glyphicon-plus
               .panel-body {{quest.desc}}
 
       .panel.panel-default
@@ -28,8 +28,14 @@ block content
               .panel-heading {{quest.name}}
                 {{quest.name}}
                 button.btn.btn-danger.btn-xs.pull-right(ng-click="remove(quest)")
-                  .glyphicon.glyphicon-remove
+                  .glyphicon.glyphicon-minus
               .panel-body {{quest.desc}}
+                .input-group
+                  span.input-group-btn(ng-click="submitCode(quest, code)")
+                    button.btn.btn-success
+                      .glyphicon.glyphicon-ok
+                  input.form-control(ng-model="code",
+                    placeholder="Enter a code here", type="text")
 
       .panel.panel-default
         .panel-heading(ng-click="showClosed = !showClosed")

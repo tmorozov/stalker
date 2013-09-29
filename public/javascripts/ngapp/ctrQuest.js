@@ -29,4 +29,8 @@ function ctrQuests($scope) {
   $scope.remove = function(quest) {
     quest.state = 0;
   }
+
+  $scope.submitCode = function (quest, code) {
+    quest.state = 2;
+  }
 }
