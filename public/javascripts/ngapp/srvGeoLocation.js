@@ -1,4 +1,4 @@
-app.factory('Geolocation', function($rootScope) {
+app.factory('Geolocation', function($rootScope, $q) {
   function positionOk(position) {
     $rootScope.$apply(function() {
       $rootScope.$broadcast("locationUpdated", {
@@ -16,14 +16,17 @@ app.factory('Geolocation', function($rootScope) {
     });
   }
 
+  function validOptions(options) {
+    var locOptions = options || { 
+      enableHighAccuracy: true, 
+      maximumAge: 60000, // 1 min
+      timeout: 30000 // 30 sec
+    };
+    return locOptions;
+  }
+
   return {
     watch: function(options) {
-      var locOptions = options || { 
-        enableHighAccuracy: true, 
-        maximumAge: 60000, // 1 min
-        timeout: 30000 // 30 sec
-      };
-
       if (!navigator.geolocation) {
         return false;
       }
@@ -31,9 +34,30 @@ app.factory('Geolocation', function($rootScope) {
       var watchId = navigator.geolocation.watchPosition(
         positionOk, 
         positionError, 
-        locOptions
+        validOptions(options)
       );
       return watchId;
+    },
+    position: function (options) {
+      if (!navigator.geolocation) {
+        return false;
+      }
+
+      var deferred = $q.defer()
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          $rootScope.$apply(function () {
+            deferred.resolve(pos.coords)
+          })
+        }, 
+        function (error) {
+          $rootScope.$apply(function () {
+            deferred.reject(error)
+          })
+        },
+        validOptions(options)
+      );
+      return deferred.promise
     }
   };
 });

@@ -2,7 +2,7 @@ extends layout
 
 block content
   .container
-    .dropdown(ng-class="{true: 'open', false: ''}[openMarkers]")
+    .dropdown(ng-class="{true: 'open', false: ''}[!!openMarkers]")
       button.btn.btn-default.dropdown-toggle(ng-click="openMarkers=!openMarkers",
         type="button") Select Markers
         span.caret

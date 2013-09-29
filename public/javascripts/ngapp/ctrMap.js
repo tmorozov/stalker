@@ -1,10 +1,11 @@
 function ctrMap($scope, Geolocation) {
-  function initializeMap() {
+
+  function initializeMap(center) {
 
     var mapOptions = {
       disableDefaultUI: true,
       zoom: 16,
-      center: new google.maps.LatLng(49.8622, 23.9171),
+      center: new google.maps.LatLng(center[0], center[1]),
       mapTypeId: google.maps.MapTypeId.SATELLITE
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -41,9 +42,11 @@ function ctrMap($scope, Geolocation) {
     $scope.map.setCenter(new google.maps.LatLng(location[0], location[1]));
   }
 
+  var mapCenter = [49.8622, 23.9171];
+
   $scope.me = {
     name: 'Я',
-    location: [49.862155,23.916207],
+    location: [49.8622, 23.9171],
     img: 'me'
   };
 
@@ -71,20 +74,25 @@ function ctrMap($scope, Geolocation) {
     img: 'target'
   }];
 
-  $scope.map = initializeMap();
+  $scope.map = initializeMap(mapCenter);
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
-  showOverlay($scope.map, [$scope.me]);
+  // no Me marker before position set
+  // showOverlay($scope.map, [$scope.me]);
 
-  $scope.openMarkers = false;
-  $scope.$on("locationUpdated", function (event, position) {
-    if(position.valid) {
+  function updateMePosition(position) {
+    removeMarker($scope.me.marker);
+    if(position.valid && position.coords.accuracy < 30) {
       $scope.me.location = [position.coords.latitude, position.coords.longitude];
-
-      removeMarker($scope.me.marker);
       showOverlay($scope.map, [$scope.me]);
     }
+  }
+
+  $scope.$on("locationUpdated", function (event, position) {
+    updateMePosition(position);
   });
 
-  Geolocation.watch();
+  Geolocation.position().then(function(position) {
+    updateMePosition(position);
+  });
 }

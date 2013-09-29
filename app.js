@@ -15,6 +15,8 @@ var goal = require('./routes/goal');
 var test = require('./routes/test');
 var ngapp = require('./routes/ngapp');
 
+app.use(express.compress());
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -27,6 +29,8 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(require('less-middleware')({ src: __dirname + '/public' }));
+// var oneDay = 86400000;
+// app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneDay }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // // development only
@@ -36,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.errorHandler());
 app.locals.pretty = true;
+
 
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
