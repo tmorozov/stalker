@@ -2,18 +2,23 @@ doctype 5
 html(ng-app="main")
   head
     title= title
-    meta(name="viewport", 
+    meta(name="viewport",
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     meta(charset="utf-8")
     link(rel='stylesheet',href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    
+
     script(src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en")
     script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js")
     script(src="javascripts/ngapp/app.js")
-    script(src="javascripts/ngapp/srvGeoLocation.js")
-    script(src="javascripts/ngapp/ctrMap.js")
-    script(src="javascripts/ngapp/ctrQuest.js")
-    
+
+    script(src="javascripts/ngapp/services/srvQuests.js")
+    script(src="javascripts/ngapp/services/srvLocations.js")
+
+    script(src="javascripts/ngapp/services/srvGeoLocation.js")
+
+    script(src="javascripts/ngapp/controllers/ctrAuth.js")
+    script(src="javascripts/ngapp/controllers/ctrMap.js")
+    script(src="javascripts/ngapp/controllers/ctrQuest.js")
+
   body(ng-view)
-   

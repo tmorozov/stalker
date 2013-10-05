@@ -1,4 +1,4 @@
-function ctrMap($scope, Geolocation) {
+app.controller('ctrMap', function ($scope, Geolocation, Locations) {
 
   function initializeMap(center) {
 
@@ -24,7 +24,7 @@ function ctrMap($scope, Geolocation) {
         position: new google.maps.LatLng(point.location[0], point.location[1]),
         map: map,
         title: point.name,
-        icon: '/images/'+point.img+'.png'
+        icon: '/images/'+point.type+'.png'
       });
 
       point.marker = marker;
@@ -44,35 +44,9 @@ function ctrMap($scope, Geolocation) {
 
   var mapCenter = [49.8622, 23.9171];
 
-  $scope.me = {
-    name: 'Я',
-    location: [49.8622, 23.9171],
-    img: 'me'
-  };
-
-  $scope.npcs = [{
-    name: 'Доктор',
-    location: [49.862155,23.916207],
-    img: 'npc'
-  }, {
-    name: 'Барыга',
-    location: [49.864416,23.921962],
-    img: 'npc'
-  }, {
-    name: 'Бармен',
-    location: [49.860313,23.925817],
-    img: 'npc'
-  }];
-
-  $scope.targets = [{
-    name: '2b2',
-    location: [49.86498,23.916439],
-    img: 'target'
-  }, {
-    name: '6i4',
-    location: [49.863714,23.919054],
-    img: 'target'
-  }];
+  $scope.me = Locations.me;
+  $scope.npcs = Locations.npcs;
+  $scope.targets = Locations.targets;
 
   $scope.map = initializeMap(mapCenter);
   showOverlay($scope.map, $scope.targets);
@@ -102,4 +76,4 @@ function ctrMap($scope, Geolocation) {
   Geolocation.position().then(function(position) {
     updateMePosition(position);
   });
-}
+});

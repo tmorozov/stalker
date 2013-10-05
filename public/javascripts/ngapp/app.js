@@ -1,9 +1,9 @@
 var app = angular.module('main', []);
 app.config(function($routeProvider) {
   $routeProvider.
-    when('/quests', {controller: ctrQuests, templateUrl:'partials/quests'}).
-    when('/auth', {controller: ctrAuth, templateUrl:'partials/auth'}).
-    when('/map', {controller: ctrMap, templateUrl:'partials/map'}).
+    when('/quests', {controller: 'ctrQuests', templateUrl:'partials/quests'}).
+    when('/auth', {controller: 'ctrAuth', templateUrl:'partials/auth'}).
+    when('/map', {controller: 'ctrMap', templateUrl:'partials/map'}).
     otherwise({redirectTo:'/quests'});
 });
 
@@ -24,21 +24,10 @@ app.run(function ($rootScope, $location) {
   });
 });
 
-function ctrAuth($rootScope, $scope, $location) {
-  $scope.login = function () {
-    $rootScope.user = {
-      name: $scope.name,
-      pwd: $scope.pwd
-    }
-    $rootScope.goTo('quests');
-  }
-}
-
 app.run(function ($rootScope, Geolocation) {
   $rootScope.navState = 'error';
   $rootScope.$on("locationUpdated", function (event, position) {
     if(position.valid) {
-      console.log(position.coords);
       if(position.coords.accuracy < 30) {
         $rootScope.navState = 'ok';
       } else {
