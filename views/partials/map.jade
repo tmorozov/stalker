@@ -2,20 +2,26 @@ extends layout
 
 block content
   .container
-    .dropdown(ng-class="{true: 'open', false: ''}[!!openMarkers]")
-      button.btn.btn-default.dropdown-toggle(ng-click="openMarkers=!openMarkers",
-        type="button") Select Markers
-        span.caret
-      ul.dropdown-menu(aria-labelledby="dropdownMenu1")
-        li
-          a(tabindex="-1", ng-click="center(me.location)") {{me.name}}
-        li.divider
-        li.dropdown-header NPC
-        li(ng-repeat="npc in npcs")
-          a(ng-click="center(npc.location)", tabindex="-1") {{npc.name}}
-        li.divider
-        li.dropdown-header Targets
-        li(ng-repeat="target in targets")
-          a(ng-click="center(target.location)", tabindex="-1") {{target.name}}
+    .btn-group
+      button.btn.btn-default(ng-click="zoomIn()")
+        span.glyphicon.glyphicon-zoom-in
+      button.btn.btn-default(ng-click="zoomOut()")
+        span.glyphicon.glyphicon-zoom-out
+
+      .btn-group(ng-class="{true: 'open', false: ''}[!!openMarkers]")
+        button.btn.btn-default.dropdown-toggle(ng-click="openMarkers=!openMarkers",
+          type="button") Select Markers
+          span.caret
+        ul.dropdown-menu
+          li
+            a(tabindex="-1", ng-click="center(me.location)") {{me.name}}
+          li.divider
+          li.dropdown-header NPC
+          li(ng-repeat="npc in npcs")
+            a(ng-click="center(npc.location)", tabindex="-1") {{npc.name}}
+          li.divider
+          li.dropdown-header Targets
+          li(ng-repeat="target in targets")
+            a(ng-click="center(target.location)", tabindex="-1") {{target.name}}
 
     div#map-canvas

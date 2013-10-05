@@ -80,6 +80,13 @@ function ctrMap($scope, Geolocation) {
   // no Me marker before position set
   // showOverlay($scope.map, [$scope.me]);
 
+  $scope.zoomIn = function () {
+    $scope.map.setZoom($scope.map.getZoom()+1);
+  }
+  $scope.zoomOut = function () {
+    $scope.map.setZoom($scope.map.getZoom()-1);
+  }
+
   function updateMePosition(position) {
     removeMarker($scope.me.marker);
     if(position.valid && position.coords.accuracy < 30) {
