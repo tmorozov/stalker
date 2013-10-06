@@ -42,14 +42,8 @@ app.use(express.errorHandler());
 app.locals.pretty = true;
 
 
-app.get('/', routes.index);
+app.get('/', ngapp.index);
 app.get('/partials/:name', routes.partials);
-
-app.get('/map', map.dynamic);
-app.get('/goals', goal.index);
-app.post('/goals', goal.create);
-app.get('/location', test.location);
-app.get('/app', ngapp.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
