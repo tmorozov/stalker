@@ -6,27 +6,30 @@ app.service('Locations', function(Geolocation) {
   };
 
   this.npcs = [{
-    name: 'Доктор',
-    location: [49.862155,23.916207],
-    type: 'npc'
-  }, {
-    name: 'Барыга',
-    location: [49.864416,23.921962],
-    type: 'npc'
-  }, {
-    name: 'Бармен',
-    location: [49.860313,23.925817],
+    name: 'Мертвяк',
+    location: [49.86209461993709, 23.91571283340454],
     type: 'npc'
   }];
 
   this.targets = [{
-    name: '2b2',
-    location: [49.86498,23.916439],
-    type: 'target'
+    "name": "A",
+    "location": [49.86033789233539, 23.916399478912354],
+    "type": "target"
   }, {
-    name: '6i4',
-    location: [49.863714,23.919054],
-    type: 'target'
+    "name": "B",
+    "location": [49.86057823580848, 23.9188215136528],
+    "type": "target"
+  }, {
+    "name": "C",
+    "location": [49.861973587603934, 23.91914337873459],
+    "type": "target"
+  }, {
+    "name": "D",
+    "location": [49.86392562924272, 23.919376730918884],
+    "type": "target"
+  }, {
+    "name": "E",
+    "location": [49.864499642423276, 23.91714781522751],
+    "type": "target"
   }];
-
 });
