@@ -25,13 +25,13 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
-app.use(express.session());
+//app.use(express.cookieParser('your secret here'));
+//app.use(express.session());
 app.use(app.router);
-app.use(require('less-middleware')({ src: __dirname + '/public' }));
-// var oneDay = 86400000;
-// app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneDay }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('less-middleware')({ src: __dirname + '/public/stylesheets' }));
+var oneDay = 86400000;
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: oneDay }));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // // development only
 // if ('development' == app.get('env')) {
