@@ -1,10 +1,9 @@
-app.controller('ctrAuth', function ($rootScope, $scope) {
+app.controller('ctrAuth', function ($scope, User) {
+  $scope.user = User.user;
+
   $scope.login = function () {
-    $rootScope.user = {
-      name: $scope.name,
-      pwd: $scope.pwd
-    }
-    $rootScope.goTo('quests');
+    $scope.user.active = true;
+    $scope.goTo('quests');
   }
 });
 

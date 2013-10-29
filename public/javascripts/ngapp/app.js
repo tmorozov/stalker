@@ -7,7 +7,7 @@ app.config(function($routeProvider) {
     otherwise({redirectTo:'/quests'});
 });
 
-app.run(function ($rootScope, $location) {
+app.run(function ($rootScope, $location, User) {
   $rootScope.tabs = ['map', 'quests'];
   $rootScope.isActive = function (tab) {
     return tab === $rootScope.currentTab;
@@ -18,7 +18,7 @@ app.run(function ($rootScope, $location) {
   }
 
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    if(!$rootScope.user) {
+    if(!User.user.active) {
       $location.path('/auth');
     }
   });

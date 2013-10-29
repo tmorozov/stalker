@@ -1,8 +1,8 @@
 .container
   form.form-signin
     h2.form-signin-heading Please sign in
-    input.form-control(ng-model="name", 
+    input.form-control(ng-model="user.name",
       type="text", placeholder="User name", autofocus)
-    input.form-control(ng-model="pwd",
+    input.form-control(ng-model="user.pwd",
       type="password", placeholder="Password")
     button.btn.btn-lg.btn-primary.btn-block(ng-click="login()") Sign in
