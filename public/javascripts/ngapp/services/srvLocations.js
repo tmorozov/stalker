@@ -5,6 +5,12 @@ app.service('Locations', function(Geolocation) {
     type: 'me'
   };
 
+  this.center = {
+    name: 'Центр',
+    location: [49.8622, 23.9171],
+    type: 'center'
+  };
+
   this.npcs = [{
     name: 'Мертвяк',
     location: [49.86209461993709, 23.91571283340454],

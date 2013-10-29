@@ -5,7 +5,7 @@ app.controller('ctrMap', function ($scope, Geolocation, Locations) {
     var mapOptions = {
       disableDefaultUI: true,
       zoom: 16,
-      center: new google.maps.LatLng(center[0], center[1]),
+      center: new google.maps.LatLng(center.location[0], center.location[1]),
       mapTypeId: google.maps.MapTypeId.SATELLITE
     };
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -42,17 +42,13 @@ app.controller('ctrMap', function ($scope, Geolocation, Locations) {
     $scope.map.setCenter(new google.maps.LatLng(location[0], location[1]));
   }
 
-  var mapCenter = [49.8622, 23.9171];
-
   $scope.me = Locations.me;
   $scope.npcs = Locations.npcs;
   $scope.targets = Locations.targets;
 
-  $scope.map = initializeMap(mapCenter);
+  $scope.map = initializeMap(Locations.center);
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
-  // no Me marker before position set
-  // showOverlay($scope.map, [$scope.me]);
 
   $scope.zoomIn = function () {
     $scope.map.setZoom($scope.map.getZoom()+1);

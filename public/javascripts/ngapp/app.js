@@ -8,6 +8,8 @@ app.config(function($routeProvider) {
 });
 
 app.run(function ($rootScope, $location, User) {
+  $rootScope.user = User.user;
+
   $rootScope.tabs = ['map', 'quests'];
   $rootScope.isActive = function (tab) {
     return tab === $rootScope.currentTab;
@@ -18,7 +20,7 @@ app.run(function ($rootScope, $location, User) {
   }
 
   $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    if(!User.user.active) {
+    if(!$rootScope.user.active) {
       $location.path('/auth');
     }
   });
