@@ -46,7 +46,9 @@ app.controller('ctrMap', function ($scope, Locations) {
     $scope.map.setZoom($scope.map.getZoom()-1);
   }
 
-  $scope.$watch(Locations.me, function(positionMe, oldPosition) {
+  $scope.$watch(
+    function(){return Locations.me;},
+    function(positionMe) {
     if (positionMe) {
       removeMarker($scope.me.marker);
       $scope.me = angular.copy(positionMe);
@@ -54,7 +56,7 @@ app.controller('ctrMap', function ($scope, Locations) {
     }
   }, true);
 
-  $scope.me = angular.copy(Locations.me());
+  $scope.me = angular.copy(Locations.me);
   $scope.npcs = Locations.npcs;
   $scope.targets = Locations.targets;
 

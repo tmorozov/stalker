@@ -42,18 +42,13 @@ app.factory('Locations', function($rootScope, Geolocation) {
     }]
   };
 
-  $rootScope.$watch(Geolocation.positionValue, function(position, oldPosition) {
+  $rootScope.$watch(
+    function () {return Geolocation;},
+    function(position) {
     if (position && position.valid /*&& position.coords.accuracy < 30*/) {
       locations.me.location = [position.coords.latitude, position.coords.longitude];
     }
   }, true);
 
-  return {
-    me: function() {
-      return locations.me;
-    },
-    center: locations.center,
-    npcs: locations.npcs,
-    targets: locations.targets
-  };
+  return locations;
 });

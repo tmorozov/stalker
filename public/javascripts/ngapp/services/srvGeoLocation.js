@@ -37,9 +37,5 @@ app.factory('Geolocation', function($rootScope) {
 
   watch();
 
-  return {
-    positionValue: function () {
-      return positionValue;
-    }
-  };
+  return positionValue;
 });
