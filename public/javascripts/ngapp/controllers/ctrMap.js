@@ -1,4 +1,4 @@
-app.controller('ctrMap', function ($scope, Geolocation, Locations) {
+app.controller('ctrMap', function ($scope, Locations) {
 
   function initializeMap(center) {
 
@@ -32,23 +32,12 @@ app.controller('ctrMap', function ($scope, Geolocation, Locations) {
   }
 
   function removeMarker(marker) {
-    if(!marker) {
-      return;
-    }
-    marker.setMap(null);
+    marker && marker.setMap(null);
   }
 
   $scope.center = function (location) {
     $scope.map.setCenter(new google.maps.LatLng(location[0], location[1]));
   }
-
-  $scope.me = Locations.me;
-  $scope.npcs = Locations.npcs;
-  $scope.targets = Locations.targets;
-
-  $scope.map = initializeMap(Locations.center);
-  showOverlay($scope.map, $scope.targets);
-  showOverlay($scope.map, $scope.npcs);
 
   $scope.zoomIn = function () {
     $scope.map.setZoom($scope.map.getZoom()+1);
@@ -57,18 +46,20 @@ app.controller('ctrMap', function ($scope, Geolocation, Locations) {
     $scope.map.setZoom($scope.map.getZoom()-1);
   }
 
-  function updateMePosition(position) {
-    removeMarker($scope.me.marker);
-    if(position.valid && position.coords.accuracy < 30) {
-      $scope.me.location = [position.coords.latitude, position.coords.longitude];
+  $scope.$watch(Locations.me, function(positionMe, oldPosition) {
+    if (positionMe) {
+      removeMarker($scope.me.marker);
+      $scope.me = angular.copy(positionMe);
       showOverlay($scope.map, [$scope.me]);
     }
-  }
-
-  $scope.$watch(Geolocation.positionValue, function(newValue, oldValue) {
-    if (newValue) {
-      updateMePosition(newValue);
-    }
   }, true);
+
+  $scope.me = angular.copy(Locations.me());
+  $scope.npcs = Locations.npcs;
+  $scope.targets = Locations.targets;
+
+  $scope.map = initializeMap(Locations.center);
+  showOverlay($scope.map, $scope.targets);
+  showOverlay($scope.map, $scope.npcs);
 
 });

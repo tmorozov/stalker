@@ -1,4 +1,4 @@
-app.factory('Geolocation', function($rootScope, $q) {
+app.factory('Geolocation', function($rootScope) {
   var positionValue = {
     valid: false
   };
