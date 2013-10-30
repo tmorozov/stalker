@@ -65,11 +65,10 @@ app.controller('ctrMap', function ($scope, Geolocation, Locations) {
     }
   }
 
-  $scope.$on("locationUpdated", function (event, position) {
-    updateMePosition(position);
-  });
+  $scope.$watch(Geolocation.positionValue, function(newValue, oldValue) {
+    if (newValue) {
+      updateMePosition(newValue);
+    }
+  }, true);
 
-  Geolocation.position().then(function(position) {
-    updateMePosition(position);
-  });
 });

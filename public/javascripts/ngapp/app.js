@@ -26,19 +26,3 @@ app.run(function ($rootScope, $location, User) {
   });
 });
 
-app.run(function ($rootScope, Geolocation) {
-  $rootScope.navState = 'error';
-  $rootScope.$on("locationUpdated", function (event, position) {
-    if(position.valid) {
-      if(position.coords.accuracy < 30) {
-        $rootScope.navState = 'ok';
-      } else {
-        $rootScope.navState = 'warning';
-      }
-    } else {
-      $rootScope.navState = 'error';
-    }
-  });
-
-  Geolocation.watch();
-});

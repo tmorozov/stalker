@@ -6,7 +6,7 @@
         span.icon-bar
         span.icon-bar
       a.navbar-brand User: {{user.name}}
-      p.navbar-text
+      p.navbar-text(ng-controller="ctrNavOk")
         span.glyphicon.glyphicon-globe(
           ng-class="{ok:'text-success', warning:'text-warning', error: 'text-danger'}[navState]"
         )
