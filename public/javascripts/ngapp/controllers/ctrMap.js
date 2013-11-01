@@ -70,6 +70,10 @@ app.controller('ctrMap', function ($scope, Locations) {
     }
   }, true);
 
+  $scope.syncronize = function () {
+    Locations.syncronize();
+  }
+
   $scope.me = angular.copy(Locations.me);
   $scope.npcs = Locations.npcs;
   $scope.targets = Locations.targets;

@@ -8,9 +8,9 @@ exports.create = function(req, res){
 
   var token = shasum.digest('hex');
 
-  tokens.tokens[token] = {
-    username: req.body.name,
-    password: req.body.pwd
+  tokens.all[token] = {
+    // password: req.body.pwd,
+    name: req.body.name
   };
 
   res.json({

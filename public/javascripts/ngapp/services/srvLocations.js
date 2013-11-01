@@ -1,4 +1,4 @@
-app.factory('Locations', function($rootScope, Geolocation) {
+app.factory('Locations', function($rootScope, $http, Geolocation, User) {
 
   var locations = {
     me: {
@@ -39,8 +39,29 @@ app.factory('Locations', function($rootScope, Geolocation) {
       "name": "E",
       "location": [49.864499642423276, 23.91714781522751],
       "type": "target"
-    }]
+    }],
+
+    syncronize: syncronize
   };
+
+  function syncronize() {
+    $http.put('/positions/me', {
+      location: locations.me.location
+    }, {
+      headers: {
+        "Token": User.user.token
+      }
+    });
+
+    $http.get('/positions', null, {
+      headers: {
+        "Token": User.user.token
+      }
+    }).
+      success(function(data, status, headers, config) {
+        console.log(data);
+    });
+  }
 
   $rootScope.$watch(
     function () {return Geolocation;},

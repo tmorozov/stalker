@@ -23,5 +23,7 @@ block content
           li.dropdown-header Targets
           li(ng-repeat="target in targets")
             a(ng-click="center(target)", tabindex="-1") {{target.name}}
+      button.btn.btn-default(ng-click="syncronize()")
+        span.glyphicon.glyphicon-transfer
 
     div#map-canvas

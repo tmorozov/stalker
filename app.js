@@ -12,6 +12,7 @@ var app = express();
 var routes = require('./routes');
 var ngapp = require('./routes/ngapp');
 var apiSecurity = require('./routes/api_security');
+var positions = require('./routes/positions');
 
 app.use(express.compress());
 
@@ -43,6 +44,8 @@ app.locals.pretty = true;
 app.get('/', ngapp.index);
 app.get('/partials/:name', routes.partials);
 app.post('/securityContext', apiSecurity.create);
+app.put('/positions/me', positions.updateMe);
+app.get('/positions', positions.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
