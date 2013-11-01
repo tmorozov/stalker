@@ -3,8 +3,6 @@ var tokens = require('../tokens');
 exports.updateMe = function(req, res){
   var token = req.headers['token'];
 
-console.log(req.headers, token, tokens);
-
   if (tokens.all[token]) {
     tokens.all[token]['location'] = req.body.location;
     res.json(tokens.all[token]);
@@ -14,14 +12,20 @@ console.log(req.headers, token, tokens);
 };
 
 exports.index = function(req, res){
+  var token = req.headers['token'];
   var positions = [];
-  Object.keys(tokens.all).forEach(function(item) {
-    var position = {
-      name: tokens.all[item].name,
-      location: tokens.all[item].location
-    };
 
-    positions.push(position);
+  Object.keys(tokens.all).
+    filter(function(item) {
+      return item != token;
+  }).
+    forEach(function(item) {
+      var position = {
+        name: tokens.all[item].name,
+        location: tokens.all[item].location
+      };
+
+      positions.push(position);
   });
 
   res.json(positions);

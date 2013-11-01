@@ -53,7 +53,7 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
       }
     });
 
-    $http.get('/positions', null, {
+    $http.get('/positions', {
       headers: {
         "Token": User.user.token
       }
