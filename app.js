@@ -10,10 +10,8 @@ var app = express();
 
 // routes
 var routes = require('./routes');
-var map = require('./routes/map');
-var goal = require('./routes/goal');
-var test = require('./routes/test');
 var ngapp = require('./routes/ngapp');
+var apiSecurity = require('./routes/api_security');
 
 app.use(express.compress());
 
@@ -44,6 +42,7 @@ app.locals.pretty = true;
 
 app.get('/', ngapp.index);
 app.get('/partials/:name', routes.partials);
+app.post('/securityContext', apiSecurity.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

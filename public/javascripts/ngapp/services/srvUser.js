@@ -2,6 +2,7 @@ app.service('User', function() {
   this.user = {
     name: "",
     pwd: "",
-    active: false
+    active: false,
+    token: null
   };
 });
