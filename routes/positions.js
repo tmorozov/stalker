@@ -22,7 +22,8 @@ exports.index = function(req, res){
     forEach(function(item) {
       var position = {
         name: tokens.all[item].name,
-        location: tokens.all[item].location
+        location: tokens.all[item].location,
+        type: tokens.all[item].type
       };
 
       positions.push(position);

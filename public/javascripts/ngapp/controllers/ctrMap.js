@@ -35,20 +35,20 @@ app.controller('ctrMap', function ($scope, Locations) {
     marker && marker.setMap(null);
   }
 
-  function showDistanceTo(point1, point2) {
-    if (point1 && point2) {
-      var point1loc = new google.maps.LatLng(point1.location[0], point1.location[1]);
-      var point2loc = new google.maps.LatLng(point2.location[0], point2.location[1]);
+  // function showDistanceTo(point1, point2) {
+  //   if (point1 && point2) {
+  //     var point1loc = new google.maps.LatLng(point1.location[0], point1.location[1]);
+  //     var point2loc = new google.maps.LatLng(point2.location[0], point2.location[1]);
 
-      console.log(google.maps.geometry.spherical.computeDistanceBetween (point1loc, point2loc));
+  //     console.log(google.maps.geometry.spherical.computeDistanceBetween (point1loc, point2loc));
 
-    }
-  }
+  //   }
+  // }
 
   $scope.center = function (point) {
     $scope.map.setCenter(new google.maps.LatLng(point.location[0], point.location[1]));
     $scope.target = point;
-    showDistanceTo($scope.me, $scope.target);
+    // showDistanceTo($scope.me, $scope.target);
   }
 
   $scope.zoomIn = function () {
@@ -66,7 +66,21 @@ app.controller('ctrMap', function ($scope, Locations) {
       $scope.me = angular.copy(positionMe);
       showOverlay($scope.map, [$scope.me]);
 
-      showDistanceTo($scope.me, $scope.target);
+      // showDistanceTo($scope.me, $scope.target);
+    }
+  }, true);
+
+  $scope.$watch(
+    function(){return Locations.oponents;},
+    function(oponents) {
+    if (oponents) {
+      $scope.oponents.forEach(function(item){
+        removeMarker(item.marker);
+      });
+
+      $scope.oponents = angular.copy(Locations.oponents);
+console.log($scope.oponents);
+      showOverlay($scope.map, $scope.oponents);
     }
   }, true);
 
@@ -77,11 +91,13 @@ app.controller('ctrMap', function ($scope, Locations) {
   $scope.me = angular.copy(Locations.me);
   $scope.npcs = Locations.npcs;
   $scope.targets = Locations.targets;
+  $scope.oponents = angular.copy(Locations.oponents);
 
   $scope.target = $scope.npcs[0];
 
   $scope.map = initializeMap(Locations.center);
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
+  showOverlay($scope.map, $scope.oponents);
 
 });

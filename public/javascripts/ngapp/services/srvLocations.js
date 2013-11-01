@@ -7,6 +7,8 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
       type: 'me'
     },
 
+    oponents: [],
+
     center: {
       name: 'Центр',
       location: [49.8622, 23.9171],
@@ -45,21 +47,19 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
   };
 
   function syncronize() {
+    var options = {
+      headers: {
+        "Token": User.user.token
+      }
+    };
+
     $http.put('/positions/me', {
       location: locations.me.location
-    }, {
-      headers: {
-        "Token": User.user.token
-      }
-    });
+    }, options);
 
-    $http.get('/positions', {
-      headers: {
-        "Token": User.user.token
-      }
-    }).
+    $http.get('/positions', options).
       success(function(data, status, headers, config) {
-        console.log(data);
+        locations.oponents = data;
     });
   }
 

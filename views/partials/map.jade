@@ -23,6 +23,10 @@ block content
           li.dropdown-header Targets
           li(ng-repeat="target in targets")
             a(ng-click="center(target)", tabindex="-1") {{target.name}}
+          li.divider
+          li.dropdown-header Oponents
+          li(ng-repeat="oponent in oponents")
+            a(ng-click="center(oponent)", tabindex="-1") {{oponent.name}}
       button.btn.btn-default(ng-click="syncronize()")
         span.glyphicon.glyphicon-transfer
 
