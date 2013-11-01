@@ -7,9 +7,9 @@ app.controller('ctrAuth', function ($scope, $http, User) {
         $scope.user.active = true;
         $scope.user.token  = data.token;
         $scope.goTo('quests');
-      }).
+    }).
       error(function(data, status, headers, config) {
-      });
+    });
   }
 });
 

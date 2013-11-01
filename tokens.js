@@ -1,3 +1,1 @@
-var tokens = {};
-
-exports.tokens = tokens;
+exports.all = {};
