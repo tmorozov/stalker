@@ -2,6 +2,9 @@ app.controller('ctrAuth', function ($scope, $http, User) {
   $scope.user = User.user;
 
   $scope.login = function () {
+    if (!$scope.user.name) {
+      return;
+    }
     $http.post('/securityContext', $scope.user).
       success(function(data, status, headers, config) {
         $scope.user.active = true;
