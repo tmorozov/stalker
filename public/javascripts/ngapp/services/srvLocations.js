@@ -11,7 +11,10 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
 
     center: {
       name: 'Центр',
-      location: [49.8622, 23.9171],
+      location: [
+          49.79808329881455,
+          24.08562272787094
+        ],
       type: 'center'
     },
 
@@ -21,27 +24,40 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
       type: 'npc'
     }],
 
-    targets: [{
-      "name": "A",
-      "location": [49.86033789233539, 23.916399478912354],
-      "type": "target"
-    }, {
-      "name": "B",
-      "location": [49.86057823580848, 23.9188215136528],
-      "type": "target"
-    }, {
-      "name": "C",
-      "location": [49.861973587603934, 23.91914337873459],
-      "type": "target"
-    }, {
-      "name": "D",
-      "location": [49.86392562924272, 23.919376730918884],
-      "type": "target"
-    }, {
-      "name": "E",
-      "location": [49.864499642423276, 23.91714781522751],
-      "type": "target"
-    }],
+    targets: [
+      {
+        "name": "вход в лес",
+        "location": [
+          49.79808329881455,
+          24.08562272787094
+        ],
+        "type": "target"
+      },
+      {
+        "name": "мусорка",
+        "location": [
+          49.80515869058806,
+          24.081602096557617
+        ],
+        "type": "target"
+      },
+      {
+        "name": "родник",
+        "location": [
+          49.80386383443098,
+          24.09152626991272
+        ],
+        "type": "target"
+      },
+      {
+        "name": "водопад",
+        "location": [
+          49.80536641829856,
+          24.10001277923584
+        ],
+        "type": "target"
+      }
+    ],
 
     syncronize: syncronize
   };

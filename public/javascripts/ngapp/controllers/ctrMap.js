@@ -13,6 +13,19 @@ app.controller('ctrMap', function ($scope, Locations) {
     return map;
   }
 
+  function initImg() {
+
+    var imageBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(49.796500, 24.08200),
+      new google.maps.LatLng(49.811700, 24.11100));
+
+      var imgOverlay = new google.maps.GroundOverlay(
+        '/images/syhov55_5.jpg',
+        imageBounds
+      );
+    return imgOverlay;
+  }
+
   function showOverlay(map, points) {
     if(! points) {
       return [];
@@ -20,14 +33,17 @@ app.controller('ctrMap', function ($scope, Locations) {
 
     for(var i=points.length-1; i>=0; i--) {
       var point = points[i];
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(point.location[0], point.location[1]),
-        map: map,
-        title: point.name,
-        icon: '/images/'+point.type+'.png'
-      });
 
-      point.marker = marker;
+      if (point.location) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(point.location[0], point.location[1]),
+          map: map,
+          title: point.name,
+          icon: '/images/'+point.type+'.png'
+        });
+
+        point.marker = marker;
+      }
     }
   }
 
@@ -46,16 +62,27 @@ app.controller('ctrMap', function ($scope, Locations) {
   // }
 
   $scope.center = function (point) {
-    $scope.map.setCenter(new google.maps.LatLng(point.location[0], point.location[1]));
-    $scope.target = point;
-    // showDistanceTo($scope.me, $scope.target);
+    if (point && point.location) {
+      $scope.map.setCenter(new google.maps.LatLng(point.location[0], point.location[1]));
+      // $scope.target = point;
+      // showDistanceTo($scope.me, $scope.target);
+    }
   }
 
   $scope.zoomIn = function () {
     $scope.map.setZoom($scope.map.getZoom()+1);
   }
+
   $scope.zoomOut = function () {
     $scope.map.setZoom($scope.map.getZoom()-1);
+  }
+
+  function showImg() {
+    $scope.imgOverlay.setMap($scope.map);
+  }
+
+  function hideImg() {
+    $scope.imgOverlay.setMap(null);
   }
 
   $scope.$watch(
@@ -79,7 +106,6 @@ app.controller('ctrMap', function ($scope, Locations) {
       });
 
       $scope.oponents = angular.copy(Locations.oponents);
-console.log($scope.oponents);
       showOverlay($scope.map, $scope.oponents);
     }
   }, true);
@@ -88,16 +114,31 @@ console.log($scope.oponents);
     Locations.syncronize();
   }
 
+  $scope.togleImg = function() {
+    if ($scope.imgOverlay.getMap()) {
+      hideImg();
+    } else {
+      showImg();
+    }
+
+  }
+
   $scope.me = angular.copy(Locations.me);
   $scope.npcs = Locations.npcs;
   $scope.targets = Locations.targets;
   $scope.oponents = angular.copy(Locations.oponents);
 
-  $scope.target = $scope.npcs[0];
+  // $scope.target = $scope.npcs[0];
 
   $scope.map = initializeMap(Locations.center);
+  $scope.imgOverlay = initImg();
+
+  showImg();
+
+
   showOverlay($scope.map, $scope.targets);
   showOverlay($scope.map, $scope.npcs);
   showOverlay($scope.map, $scope.oponents);
+
 
 });

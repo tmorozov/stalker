@@ -27,6 +27,8 @@ block content
           li.dropdown-header Oponents
           li(ng-repeat="oponent in oponents")
             a(ng-click="center(oponent)", tabindex="-1") {{oponent.name}}
+      button.btn.btn-default(ng-click="togleImg()")
+        span.glyphicon.glyphicon-picture
       button.btn.btn-default(ng-click="syncronize()")
         span.glyphicon.glyphicon-transfer
 
