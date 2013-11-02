@@ -137,7 +137,8 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
     };
 
     $http.put('/positions/me', {
-      location: locations.me.location
+      location: locations.me.location,
+      name: locations.me.name
     }, options);
 
     $http.get('/positions', options).
