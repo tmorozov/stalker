@@ -11,7 +11,7 @@ block content
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showAvailable]")
           .panel-body
             .panel.panel-default(ng-repeat="quest in quests | filter:{state: 0}")
-              .panel-heading 
+              .panel-heading
                 {{quest.name}}
                 button.btn.btn-success.btn-xs.pull-right(ng-click="activate(quest)")
                   .glyphicon.glyphicon-plus
@@ -26,7 +26,6 @@ block content
           .panel-body
             .panel.panel-default(ng-repeat="quest in quests | filter:{state: 1}")
               .panel-heading {{quest.name}}
-                {{quest.name}}
                 button.btn.btn-danger.btn-xs.pull-right(ng-click="remove(quest)")
                   .glyphicon.glyphicon-minus
               .panel-body {{quest.desc}}
@@ -39,7 +38,7 @@ block content
 
       .panel.panel-default
         .panel-heading(ng-click="showClosed = !showClosed")
-          h4.panel-title Закрытые задания  
+          h4.panel-title Закрытые задания
             span.badge.pull-right {{(quests | filter:{state: 2}).length}}
 
         .panel-collapse(ng-class="{true: 'in', false: 'collapse'}[!!showClosed]")

@@ -69,6 +69,14 @@ app.factory('Locations', function($rootScope, $http, Geolocation, User) {
         "type": "target"
       },
       {
+        "name": "база Верхний Хошемин",
+        "location": [
+          49.80198727019354,
+          24.09079670906067
+        ],
+        "type": "target"
+      },
+      {
         "name": "база Морпехов",
         "location": [
           49.800616155133184,

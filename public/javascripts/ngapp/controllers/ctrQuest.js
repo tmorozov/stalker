@@ -11,6 +11,6 @@ app.controller( 'ctrQuests', function ($scope, Quests) {
   }
 
   $scope.submitCode = function (quest, code) {
-    quest.state = 2;
+    //quest.state = 2;
   }
 });
